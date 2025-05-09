@@ -71,7 +71,7 @@ def _get_oneof_validator(oneof_fields: List, oneof_key: str) -> Callable:
         return values
 
     oneof_validator.__qualname__ = 'validate_' + oneof_key
-    return root_validator(pre=True, allow_reuse=True)(oneof_validator)
+    return root_validator(pre=True, skip_on_failure=True, allow_reuse=True)(oneof_validator)
 
 
 def _get_oneof_setter(oneof_fields: List, oneof_key: str) -> Callable:
@@ -95,7 +95,7 @@ def _get_oneof_setter(oneof_fields: List, oneof_key: str) -> Callable:
         return values
 
     oneof_setter.__qualname__ = 'set_' + oneof_key
-    return root_validator(pre=False, allow_reuse=True)(oneof_setter)
+    return root_validator(pre=False, skip_on_failure=True, allow_reuse=True)(oneof_setter)
 
 
 def protobuf_to_pydantic_model(
